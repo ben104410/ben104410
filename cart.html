@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cart - StyleNest</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>REBECCA'S COLLECTION</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="cart.html">Cart</a>
+    </nav>
+  </header>
+
+  <section class="content">
+    <h2>Your Cart</h2>
+    <div id="cart-items"></div>
+    <p id="empty-cart-msg">Your cart is empty.</p>
+  </section>
+
+  
+
+  <script>
+    function getCart() {
+      return JSON.parse(localStorage.getItem('cart') || '[]');
+    }
+
+    function saveCart(cart) {
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    function renderCart() {
+      const cart = getCart();
+      const cartItemsDiv = document.getElementById('cart-items');
+      cartItemsDiv.innerHTML = '';
+      if (cart.length === 0) {
+        document.getElementById('empty-cart-msg').style.display = 'block';
+        return;
+      } else {
+        document.getElementById('empty-cart-msg').style.display = 'none';
+      }
+      cart.forEach((item, idx) => {
+        const div = document.createElement('div');
+        div.className = 'product-card';
+        div.innerHTML = `
+          <img src="${item.img}" alt="${item.name}" style="max-width:120px;"/>
+          <h3>${item.name}</h3>
+          <p>${item.price}</p>
+          <button data-idx="${idx}">Remove</button>
+        `;
+        cartItemsDiv.appendChild(div);
+      });
+      // Add remove event listeners
+      cartItemsDiv.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const idx = parseInt(this.getAttribute('data-idx'));
+          let cart = getCart();
+          cart.splice(idx, 1);
+          saveCart(cart);
+          renderCart();
+        });
+      });
+    }
+
+    renderCart();
+  </script>
+</body>
+</html>
+<footer>
+    &copy; 2025 StyleNest. All rights reserved.
+  </footer>

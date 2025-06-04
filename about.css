@@ -1,0 +1,15 @@
+.content {
+  text-align: center;
+  margin: 0 auto;
+  color: rgb(105, 30, 226);
+  background-color: #5698c4;
+}
+  .content h2 {
+    margin-top: 20px;
+    color: rgb(102, 66, 187);
+  }
+  .content p {
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }

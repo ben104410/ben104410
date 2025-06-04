@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Products - StyleNest</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header>
+    <h1>REBECCA'S COLLECTION</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="cart.html">Cart</a>
+    </nav>
+  </header>
+
+  <!-- Products Section -->
+  <section class="content">
+    <h2>Our Products</h2>
+    <div class="products">
+      <div class="product-card">
+        <img src="Summer Elegant Fashion Harajuku Slim Fit Ropa….jpg" alt="T-Shirt" />
+        <h3>Graphic T-Shirt</h3>
+        <p>$19.99</p>
+        <button>Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="🔥 Stay warm and stylish with our new puffer….jpg" alt="Hoodie" />
+        <h3>Classic Hoodie</h3>
+        <p>$39.99</p>
+        <button>Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="Cut-out Denim Jeans! Swipe for a live picture….jpg" alt="Jeans" />
+        <h3>Denim Jeans</h3>
+        <p>$34.99</p>
+        <button>Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="a5113c6f-b2bf-49e3-87fb-99d3c80f39e8.jpg" alt="Sneakers" />
+        <h3>Running Sneakers</h3>
+        <p>$59.99</p>
+        <button>Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="Wolverine-Carlsbad Steel Toe Work Boot - Men's….jpg" alt="Boots" />
+        <h3>Leather Boots</h3>
+        <p>$79.99</p>
+        <button>Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="8a55b321-16c4-4492-bd75-90450105b6e1.jpg" alt="Jacket" />
+        <h3>Winter Jacket</h3>
+        <p>$89.99</p>
+        <button>Add to Cart</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 StyleNest. All rights reserved.
+  </footer>
+
+  <script>
+    // Helper to get cart from localStorage
+    function getCart() {
+      return JSON.parse(localStorage.getItem('cart') || '[]');
+    }
+
+    // Helper to save cart to localStorage
+    function saveCart(cart) {
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    // Add click event to all Add to Cart buttons
+    document.querySelectorAll('.product-card').forEach(function(card) {
+      card.querySelector('button').addEventListener('click', function() {
+        const name = card.querySelector('h3').innerText;
+        const price = card.querySelector('p').innerText;
+        const img = card.querySelector('img').getAttribute('src');
+        let cart = getCart();
+        cart.push({ name, price, img });
+        saveCart(cart);
+        alert('Added to cart!');
+      });
+    });
+  </script>
+</body>
+</html>
